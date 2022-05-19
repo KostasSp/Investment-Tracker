@@ -1,16 +1,19 @@
 import "./App.scss";
-import SideBar from "./SideBar.js";
-import { FetchStock } from "./FetchStock.jsx";
+import FetchStock from "./FetchStock";
+import SideBar from "./components/sidebar/SideBar.jsx";
 import { FetchCryptoRealTime } from "./components/realtime-crypto/FetchCryptoRealTime.jsx";
-
-//RAFCE + tab -> makes react component boilerplate
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <SideBar />
-      {/* <FetchStock /> */}
-      <FetchCryptoRealTime />
+      <BrowserRouter>
+        <SideBar />
+        <Routes>
+          <Route path={"/"} element={<FetchCryptoRealTime />} />
+          <Route path="/realtime-stock-updates" element={<FetchStock />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

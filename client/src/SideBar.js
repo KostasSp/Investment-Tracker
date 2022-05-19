@@ -1,6 +1,5 @@
 import "./SideBar.scss";
 import React, { useState } from "react";
-//react-pro-sidebar components
 import {
   ProSidebar,
   Menu,
@@ -9,7 +8,6 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-//from react-icons
 import { FaList, FaRegHeart } from "react-icons/fa";
 import {
   FiHome,
@@ -17,51 +15,84 @@ import {
   FiArrowLeftCircle,
   FiArrowRightCircle,
 } from "react-icons/fi";
-import { RiPencilLine } from "react-icons/ri";
-import { BiCog } from "react-icons/bi";
-
-//import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import HelpCenterIcon from "@mui/icons-material/HelpCenter";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
-  //create initial menuCollapse state using useState hook
   const [menuCollapse, setMenuCollapse] = useState(false);
 
-  //create a custom function that will change menucollapse state from false to true and true to false
   const menuIconClick = () => {
-    //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
 
   return (
     <>
       <div id="header">
-        {/* collapsed props to change menu size using menucollapse state */}
         <ProSidebar collapsed={menuCollapse}>
           <SidebarHeader>
             <div className="logotext">
-              {/* small and big change using menucollapse state */}
-              <p>{menuCollapse ? "Logo" : "Big Logo"}</p>
+              <p>Pages</p>
             </div>
             <div className="closemenu" onClick={menuIconClick}>
-              {/* changing menu collapse icon on click */}
               {menuCollapse ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
             </div>
           </SidebarHeader>
           <SidebarContent>
-            <Menu iconShape="square">
-              <MenuItem active={true} icon={<FiHome />}>
-                Home
+            <Menu iconShape="">
+              <MenuItem
+                className="sidebar-item"
+                icon={"Crypto"}
+                style={{ fontSize: "13px" }}
+              >
+                <Link to={"/"}>
+                  <i>real-time updates</i>
+                </Link>
               </MenuItem>
-              <MenuItem icon={<FaList />}>Category</MenuItem>
-              <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
-              <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
-              <MenuItem icon={<BiCog />}>Settings</MenuItem>
+              <MenuItem
+                className="sidebar-item"
+                icon={"Stocks"}
+                style={{ fontSize: "13px" }}
+              >
+                <Link to={"/realtime-stock-updates"}>
+                  <i>real-time updates</i>
+                </Link>
+              </MenuItem>
+              <MenuItem
+                className="sidebar-item"
+                icon={"Crypto"}
+                style={{ fontSize: "13px", marginTop: "35px" }}
+              >
+                <i>daily updates</i>
+              </MenuItem>
+
+              <MenuItem
+                className="sidebar-item"
+                icon={"Stocks"}
+                style={{ fontSize: "13px" }}
+              >
+                <i>daily updates</i>
+              </MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+              <MenuItem
+                className="sidebar-item"
+                icon={<GitHubIcon />}
+                onClick={() =>
+                  window.open(
+                    "https://github.com/KostasSp/Investment-Tracker",
+                    "_blank"
+                  )
+                }
+              >
+                Source code
+              </MenuItem>
+              <MenuItem className="sidebar-item" icon={<HelpCenterIcon />}>
+                Help center
+              </MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>
