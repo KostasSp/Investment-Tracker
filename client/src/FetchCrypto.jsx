@@ -5,6 +5,8 @@ import { DateFormat } from "./DateFormat";
 import { ListFunctions } from "./ListFunctions";
 import UpdateIcon from "@mui/icons-material/Update";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { startCounter, resetCounter } from "../../utility/TimeCounterFunctions"; //useMemo these?
+import InputField from "../input-field/InputField";
 
 export const FetchCrypto = () => {
   const key = process.env.REACT_APP_API_KEY;
@@ -28,13 +30,6 @@ export const FetchCrypto = () => {
     time1: null,
   });
 
-  useEffect(() => {
-    if (typeof input == "undefined") return;
-    input[0].length < 2 || /\d/.test(input)
-      ? setIsValid(false)
-      : setIsValid(true);
-  }, [input]);
-
   const newCryptoFetched = (crypto) => {
     let tempArray;
     console.log(crypto);
@@ -51,48 +46,6 @@ export const FetchCrypto = () => {
     let newArr = [...cryptoData["data"]];
     newArr.splice(index, 1);
     setCryptoData({ data: newArr });
-  };
-
-  const changeOrder = (index, direction) => {
-    let operatorSign = null;
-    direction === "^" ? (operatorSign = index - 1) : (operatorSign = index + 1);
-    let newArr = [...cryptoData["data"]];
-    let holder = newArr[operatorSign];
-    if (typeof holder == "undefined") return setCryptoData({ data: newArr });
-    newArr[operatorSign] = newArr[index];
-    newArr[index] = holder;
-    setCryptoData({ data: newArr });
-  };
-
-  //the idea is to start a counter as soon as the first api call is made, so that we don't wait full 60 sec when 4 api calls reached
-  const startCounter = () => {
-    let seconds = 0;
-    let test = setInterval(() => {
-      seconds++;
-      if (seconds === 60) {
-        setLimitReached(false);
-        clearInterval(test);
-        apiCallCount.current = 0;
-      }
-    }, 1000);
-  };
-
-  const resetCounter = () => {
-    setInterval(() => (apiCallCount.current = 0), 60000);
-    setLimitReached(true);
-  };
-
-  const testApiCall = (index) => {
-    //22/02 01:54 -> error when I try to update a crypto after I have already updated another one,
-    //I THINK it's because the list order of cryptoFetched gets messed up in every call, therefore
-    //the cryptoFethed[index] below is incorrect
-    fetch(
-      `https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${cryptoFetched[index]}&market=USD&interval=5min&apikey=${key}`
-    )
-      .then((response) => response.json())
-      .then((data) => newCryptoFetched(data))
-      .then(apiCallCount.current++)
-      .then(console.log("test API called"));
   };
 
   /* for the intraday 5-minute, put the result in local storage, and only allow API call when a call is 
@@ -133,12 +86,7 @@ export const FetchCrypto = () => {
       }}
     >
       {console.log(cryptoFetched)}
-      <CryptoList
-        cryptoData={cryptoData}
-        delete={deleteRow}
-        changeOrder={changeOrder}
-        fetch={testApiCall}
-      />
+      <CryptoList cryptoData={cryptoData} delete={deleteRow} />
       <UpdateIcon
         onClick={() => fetchCryptoData()}
         style={{
@@ -170,11 +118,7 @@ export const FetchCrypto = () => {
         ) : null}
       </div>
       <span>
-        {isValid ? (
-          <CheckCircleIcon className="check-icon" />
-        ) : (
-          <h5>At least two characters and no numbers</h5>
-        )}
+        <InputField inputMessage={"crypto name or symbol"} />
       </span>
     </div>
   );
