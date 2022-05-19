@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StockList } from "./StockList";
-import "./App.css";
+import "./App.scss";
 
 export const FetchStock = () => {
   const key = process.env.REACT_APP_API_KEY;

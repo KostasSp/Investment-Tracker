@@ -1,5 +1,5 @@
 import "./StockList.scss";
-import "./App.css";
+import "./App.scss";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";

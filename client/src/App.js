@@ -1,7 +1,7 @@
-import "./App.css";
+import "./App.scss";
 import SideBar from "./SideBar.js";
 import { FetchStock } from "./FetchStock.jsx";
-import { FetchCrypto } from "./FetchCrypto.jsx";
+import { FetchCryptoRealTime } from "./components/realtime-crypto/FetchCryptoRealTime.jsx";
 
 //RAFCE + tab -> makes react component boilerplate
 
@@ -10,7 +10,7 @@ function App() {
     <div>
       <SideBar />
       {/* <FetchStock /> */}
-      <FetchCrypto />
+      <FetchCryptoRealTime />
     </div>
   );
 }
