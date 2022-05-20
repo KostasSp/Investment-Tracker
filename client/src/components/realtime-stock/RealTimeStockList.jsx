@@ -1,87 +1,90 @@
-import "./App.scss";
-
+import "./RealTimeStockList";
+import "../../App.scss";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import { deleteRow, changeListOrder } from "../../utility/ListFunctions";
+import { Tooltip } from "@mui/material";
+import UpdateIcon from "@mui/icons-material/Update";
+import { latestValue } from "../../utility/RealtimeFetchUtility";
 
 export const StockList = (props) => {
-  const today = "2022-02-08"; //make a get current date func, probably through props for dynamic, also not be a weekend
-
-  const percentChange = (open, close) => {
-    let result = ((close - open) / open) * 100;
-    return result;
-  };
-
   return (
     <div>
       <table className="styled-table">
         <thead>
           <tr>
             <th>Actions</th>
-            <th>Ticker</th>
-
-            <th>Date</th>
-            <th>Price/Open</th>
-            <th>Price/Close</th>
-            <th>% change</th>
+            <th>Symbol</th>
+            <th>Datetime (UTC)</th>
+            <th>Price</th>
+            <th>Trend</th>
           </tr>
         </thead>
         <tbody>
-          {Object.keys(props.stockData).length === 0
-            ? null
-            : props.stockData.data.map((order, index) => {
-                return (
-                  <tr index={index}>
-                    <td>
-                      {" "}
-                      <DeleteOutlineIcon
-                        style={{ fontSize: "1.4em" }}
-                        onClick={() => props.delete(index)}
+          {Object.keys(props.stockData.data).length > 0 &&
+            props.stockData.data.map((data, index) => {
+              return (
+                <tr key={index}>
+                  <td>
+                    {" "}
+                    <Tooltip title="Update value">
+                      <UpdateIcon
+                        className="action-icons"
+                        onClick={() => props.update(null, index)}
                       />
-                      <ArrowDropUpIcon onClick={() => console.log(index)} />
-                      <ArrowDropDownIcon />
-                    </td>
-                    <td>{order["Meta Data"]["2. Symbol"]}</td>
-                    <td>{today}</td>
-                    <td>
-                      $
-                      {order["Time Series (Daily)"][today]["1. open"].slice(
-                        0,
-                        -2
-                      )}
-                    </td>
-                    <td>
-                      $
-                      {order["Time Series (Daily)"][today]["4. close"].slice(
-                        0,
-                        -2
-                      )}
-                    </td>
-                    <td>
-                      {percentChange(
-                        order["Time Series (Daily)"][today]["1. open"],
-                        order["Time Series (Daily)"][today]["4. close"]
-                      ).toFixed(2)}
-                      %
-                      {order["Time Series (Daily)"][today]["4. close"] >
-                      order["Time Series (Daily)"][today]["1. open"] ? (
-                        <TrendingUpIcon
-                          style={{
-                            color: "green",
-                            marginRight: "6px",
-                            position: "relative",
-                            top: "5px",
-                          }}
-                        />
-                      ) : (
-                        <TrendingDownIcon style={{ color: "red" }} />
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
+                    </Tooltip>
+                    <DeleteOutlineIcon
+                      className="action-icons"
+                      style={{ fontSize: "1.4em" }}
+                      onClick={() =>
+                        deleteRow(index, props.stockData, props.setStockData)
+                      }
+                    />
+                    <ArrowDropUpIcon
+                      className="action-icons"
+                      onClick={() =>
+                        changeListOrder(
+                          index,
+                          index - 1,
+                          props.stockData,
+                          props.setStockData
+                        )
+                      }
+                    />
+                    <ArrowDropDownIcon
+                      className="action-icons"
+                      onClick={() =>
+                        changeListOrder(
+                          index,
+                          index + 1,
+                          props.stockData,
+                          props.setStockData
+                        )
+                      }
+                    />
+                  </td>
+                  <td>{data["Meta Data"]["2. Symbol"].toUpperCase()}</td>
+                  <td>{latestValue(data)}</td>
+                  <td>
+                    $
+                    {data["Time Series (5min)"][latestValue(data)][
+                      "4. close"
+                    ].slice(0, -2)}
+                  </td>
+                  <td className="daily-price-change">
+                    {data["Time Series (5min)"][latestValue(data)]["4. close"] >
+                    data["Time Series (5min)"][latestValue(data)]["1. open"] ? (
+                      <TrendingUpIcon className="arrow-up" />
+                    ) : (
+                      <TrendingDownIcon className="arrow-down" />
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
