@@ -39,11 +39,7 @@ export const FetchStock = () => {
 
   return (
     <div>
-      {/* {console.log(apiData)} */}
       <StockList stockData={stockData} />
-      {/* centering failed because i was trying to center the button
-       (which probably ended up centering IN the component), 
-       instead of the whole component */}
       <div
         style={{
           display: "flex",
