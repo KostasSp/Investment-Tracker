@@ -5,10 +5,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import { deleteRow, changeListOrder } from "../../utility/ListFunctions";
+import { deleteRow, changeListOrder } from "../../utils/ListFunctions";
 import { Tooltip } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
-import { latestValue } from "../../utility/RealtimeFetchUtility";
+import { latestValue } from "../../utils/RealtimeFetchUtility";
 
 export const StockList = (props) => {
   return (

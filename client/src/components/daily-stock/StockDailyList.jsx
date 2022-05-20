@@ -5,8 +5,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import { deleteRow, changeListOrder } from "../../utility/ListFunctions";
-import { latestValue } from "../../utility/RealtimeFetchUtility";
+import { deleteRow, changeListOrder } from "../../utils/ListFunctions";
+import { latestValue } from "../../utils/RealtimeFetchUtility";
 
 export const StockDailyList = (props) => {
   const percentChange = (open, close) => {

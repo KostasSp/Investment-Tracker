@@ -1,10 +1,10 @@
 import { useState, useRef, useEFfect } from "react";
 import { StockList } from "./RealTimeStockList";
-import "./App.scss";
-import { filterFetchedItem } from "../../utility/RealtimeFetchUtility";
-import { startCounter, resetCounter } from "../../utility/TimeCounterFunctions"; //useMemo these?
+import "../../App.scss";
+import { filterFetchedItem } from "../../utils/RealtimeFetchUtility";
+import { startCounter, resetCounter } from "../../utils/TimeCounterFunctions"; //useMemo these?
 
-export const FetchStock = () => {
+export const FetchStockRealTime = () => {
   const key = process.env.REACT_APP_API_KEY;
 
   const API_CALL_LIMIT_PER_MINUTE = 4;
