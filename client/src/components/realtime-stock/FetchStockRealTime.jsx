@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StockList } from "./StockList";
+import { StockList } from "./RealTimeStockList";
 import "./App.scss";
 
 export const FetchStock = () => {
