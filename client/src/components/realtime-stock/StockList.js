@@ -1,4 +1,3 @@
-import "./StockList.scss";
 import "./App.scss";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
