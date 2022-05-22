@@ -79,9 +79,9 @@ export const FetchStockRealTime = () => {
       <div className="limit-reached-message">
         {limitReached && //maybe add another condition, if returned API message is error
           "reached update limit, please wait a few seconds"}
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        {errorMessage && "invalid search, please try again"}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {errorMessage && "invalid search, please try again"}
+        </div>
       </div>
       <ToolTip message="Some suggestions; Apple, Amazon, Tesla, GOOG, MSFT" />
     </div>
