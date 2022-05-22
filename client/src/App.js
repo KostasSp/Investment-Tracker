@@ -1,6 +1,6 @@
 import "./App.scss";
 import SideBar from "./components/sidebar/SideBar.jsx";
-import { FetchStockRealTime } from "./components/realtime-stocks/FetchStockRealTime.jsx";
+import { FetchStockRealTime } from "./components/realtime-stock/FetchStockRealTime.jsx";
 import { FetchCryptoRealTime } from "./components/realtime-crypto/FetchCryptoRealTime.jsx";
 import FetchCryptoDaily from "./components/daily-crypto/FetchCryptoDaily";
 import FetchStockDaily from "./components/daily-stock/FetchStockDaily";

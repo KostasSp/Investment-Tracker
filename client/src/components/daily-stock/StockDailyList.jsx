@@ -1,4 +1,4 @@
-import "../realtime-stocks/RealTimeStockList";
+import "../realtime-stock/RealTimeStockList";
 import "../../App.scss";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";

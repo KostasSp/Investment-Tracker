@@ -1,22 +1,33 @@
-import { useState, useRef, useEFfect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StockList } from "./RealTimeStockList";
 import "../../App.scss";
-import { filterFetchedItem } from "../../utils/RealtimeFetchUtility";
 import { startCounter, resetCounter } from "../../utils/TimeCounterFunctions"; //useMemo these?
-import ToolTip from "../info-messages/ToolTip";
-import { StockNameToSymbol } from "../../assets/StockNameToSymbol";
 import InputField from "../input-field/InputField";
+import { StockNameToSymbol } from "../../assets/StockNameToSymbol";
+import { filterFetchedItem } from "../../utils/RealtimeFetchUtility";
+import ToolTip from "../info-messages/ToolTip";
 
 export const FetchStockRealTime = () => {
-  const key = process.env.REACT_APP_API_KEY;
-
   const API_CALL_LIMIT_PER_MINUTE = 4;
 
   const apiCallCount = useRef(0);
+
   const [limitReached, setLimitReached] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [mappedStock, setMappedStock] = useState("");
-  const [stockData, setStockData] = useState({ data: [] });
+  const [lookedUpStock, setLookedUpStock] = useState("");
+  const [stockData, setStockData] = useState({
+    data: [],
+  });
+
+  useEffect(() => {
+    fetchStockData(lookedUpStock);
+  }, [lookedUpStock]);
+
+  //maybe make this appear only for 5 sec then clean, instead of having it permanently check every 5 sec?
+  useEffect(() => {
+    const resetErrorMessage = setInterval(() => setErrorMessage(false), 5000);
+    return () => clearInterval(resetErrorMessage);
+  });
 
   const fetchStockData = (current, index) => {
     let stock;
@@ -43,10 +54,10 @@ export const FetchStockRealTime = () => {
   const lookUpStockSymbol = (input) => {
     for (const [key, value] of Object.entries(StockNameToSymbol)) {
       if (`${value.toLowerCase()}`.includes(input.toLowerCase())) {
-        setMappedStock(`${key}`);
+        setLookedUpStock(`${key}`);
         return;
       }
-      setMappedStock(input);
+      setLookedUpStock(input);
     }
   };
 
