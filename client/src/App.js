@@ -5,6 +5,7 @@ import { FetchCryptoRealTime } from "./components/realtime-crypto/FetchCryptoRea
 import FetchCryptoDaily from "./components/daily-crypto/FetchCryptoDaily";
 import FetchStockDaily from "./components/daily-stock/FetchStockDaily";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HelpCenter from "./components/help-center/HelpCenter";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             element={<FetchCryptoDaily />}
           />
           <Route path="/daily-stock-updates" element={<FetchStockDaily />} />
+          <Route exact path="/help-center" element={<HelpCenter />} />
         </Routes>
       </BrowserRouter>
     </div>
