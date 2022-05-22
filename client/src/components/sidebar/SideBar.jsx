@@ -1,5 +1,6 @@
 import "./SideBar.scss";
 import React, { useState } from "react";
+//react-pro-sidebar components
 import {
   ProSidebar,
   Menu,
@@ -8,6 +9,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
+//from react-icons
 import { FaList, FaRegHeart } from "react-icons/fa";
 import {
   FiHome,
@@ -18,7 +20,7 @@ import {
 import "react-pro-sidebar/dist/css/styles.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 
 const SideBar = () => {
   const [menuCollapse, setMenuCollapse] = useState(false);
@@ -64,7 +66,9 @@ const SideBar = () => {
                 icon={"Crypto"}
                 style={{ fontSize: "13px", marginTop: "35px" }}
               >
-                <i>daily updates</i>
+                <Link to={"/daily-cryptocurrency-updates"}>
+                  <i>daily updates</i>
+                </Link>
               </MenuItem>
 
               <MenuItem
@@ -72,7 +76,9 @@ const SideBar = () => {
                 icon={"Stocks"}
                 style={{ fontSize: "13px" }}
               >
-                <i>daily updates</i>
+                <Link to={"/daily-stock-updates"}>
+                  <i>daily updates</i>
+                </Link>
               </MenuItem>
             </Menu>
           </SidebarContent>
@@ -83,7 +89,7 @@ const SideBar = () => {
                 icon={<GitHubIcon />}
                 onClick={() =>
                   window.open(
-                    "https://github.com/KostasSp/Investment-Tracker",
+                    "https://github.com/KostasSp/Investment-tracker",
                     "_blank"
                   )
                 }
@@ -91,7 +97,7 @@ const SideBar = () => {
                 Source code
               </MenuItem>
               <MenuItem className="sidebar-item" icon={<HelpCenterIcon />}>
-                Help center
+                <Link to={"/help-center"}>Help center </Link>
               </MenuItem>
             </Menu>
           </SidebarFooter>
