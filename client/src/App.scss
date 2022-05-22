@@ -1,13 +1,8 @@
-@mixin center-list {
+.main-div {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.main-div {
-  @include center-list;
-  width: min(100% - 2rem);
 }
 
 .styled-table {
