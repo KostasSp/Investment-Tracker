@@ -1,6 +1,6 @@
 const cors = require("cors");
 const express = require("express");
-const port = 5000;
+const port = process.env.PORT || 5000;
 const realtimeCryptoRoute = require("./realtime-crypto-api");
 const realtimeStockRoute = require("./realtime-stock-api");
 const dailyStockRoute = require("./daily-stock-api");

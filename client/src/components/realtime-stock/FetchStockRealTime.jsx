@@ -37,7 +37,9 @@ export const FetchStockRealTime = () => {
       : (stock = stockData.data[index]["Meta Data"]["2. Symbol"]);
     apiCallCount.current >= API_CALL_LIMIT_PER_MINUTE
       ? resetCounter(setLimitReached, apiCallCount) //put the interval functions in a useEffect and clear it, otherwise it constantly run after the first API call
-      : fetch(`http://localhost:5000/realtime-stock-api/${stock}`)
+      : fetch(
+          `https://investment-tracker-finished.herokuapp.com/realtime-stock-api/${stock}`
+        )
           .then((response) => response.json())
           .then((data) =>
             filterFetchedItem(data, stockData.data, setStockData, "2. Symbol")

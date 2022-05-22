@@ -36,7 +36,9 @@ export const FetchCryptoRealTime = () => {
     if (crypto === "") return;
     apiCallCount.current >= API_LIMIT_PER_MINUTE
       ? resetCounter(setLimitReached, apiCallCount) //put the interval functions in a useEffect and clear it, otherwise it constantly run after the first API call
-      : fetch(`http://localhost:5000/realtime-crypto-api/${crypto}`)
+      : fetch(
+          `https://investment-tracker-finished.herokuapp.com/realtime-crypto-api/${crypto}`
+        )
           .then((response) => response.json())
           .then((data) =>
             filterFetchedItem(

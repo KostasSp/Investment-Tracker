@@ -31,7 +31,9 @@ const FetchStockDaily = () => {
       return;
     }
     const requests = temp.map((stock) =>
-      fetch(`http://localhost:5000/daily-stock-api/${stock}`)
+      fetch(
+        `https://investment-tracker-finished.herokuapp.com/daily-stock-api/${stock}`
+      )
     );
     startCounter(setLimitReached, apiCallCount);
     const responses = await Promise.all(requests);
