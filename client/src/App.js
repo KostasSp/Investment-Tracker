@@ -1,7 +1,8 @@
 import "./App.scss";
-import { FetchStockRealTime } from "./components/realtime-stock/FetchStockRealTime.jsx";
 import SideBar from "./components/sidebar/SideBar.jsx";
+import { FetchStockRealTime } from "./components/realtime-stocks/FetchStockRealTime.jsx";
 import { FetchCryptoRealTime } from "./components/realtime-crypto/FetchCryptoRealTime.jsx";
+import FetchCryptoDaily from "./components/daily-crypto/FetchCryptoDaily";
 import FetchStockDaily from "./components/daily-stock/FetchStockDaily";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -17,6 +18,10 @@ function App() {
           <Route
             path="/realtime-stock-updates"
             element={<FetchStockRealTime />}
+          />
+          <Route
+            path="/daily-cryptocurrency-updates"
+            element={<FetchCryptoDaily />}
           />
           <Route path="/daily-stock-updates" element={<FetchStockDaily />} />
         </Routes>
