@@ -4,10 +4,9 @@ import "./HelpCenter.scss";
 const HelpCenter = () => {
   return (
     <div className="help-center">
-      {" "}
       <strong>
         <u>Guidance on using this App</u>
-      </strong>{" "}
+      </strong>
       <p>
         This Investment Tracker project is a search engine that allows the user
         to get up-to-date stock and cryptocurrency values. You can request lists

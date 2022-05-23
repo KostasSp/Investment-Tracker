@@ -20,6 +20,8 @@ const getRandomStocks = () => {
   return tempArr;
 };
 
+/* gets a random number between two specified values (in this case, for the length of the object containing 
+  stock key-value pairs) */
 const getRandomNumber = (min, max) => {
   let randomNumArr = [];
   min = Math.ceil(min);

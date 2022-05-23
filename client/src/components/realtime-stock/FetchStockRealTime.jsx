@@ -29,6 +29,11 @@ export const FetchStockRealTime = () => {
     return () => clearInterval(resetErrorMessage);
   });
 
+  /* fetches stock data, differentiates between a search for a new item and an update of an existing one and 
+  passes the item through a utility function (filterFetchedItem) so that it can be properly displayed on the 
+  table. Finally, it increments the api call count and starts the counter (for least waiting time optimisation).
+  I could have made a single function handling both stock and crypto fetches , however a different API is 
+  utilised for each, and I felt merging it reduced readability a lot (on an already hard-to-read function) */
   const fetchStockData = (current, index) => {
     let stock;
     if (current === "") return;

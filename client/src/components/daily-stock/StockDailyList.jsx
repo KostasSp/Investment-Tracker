@@ -33,9 +33,7 @@ export const StockDailyList = (props) => {
             props.stockData.data.map((data, index) => {
               return (
                 <tr index={index}>
-                  {console.log(data)}
                   <td>
-                    {" "}
                     <DeleteOutlineIcon
                       className="action-icons"
                       style={{ fontSize: "1.4em" }}

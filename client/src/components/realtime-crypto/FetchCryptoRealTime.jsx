@@ -7,7 +7,6 @@ import { CryptoNameToSymbol } from "../../assets/CryptoNameToSymbol";
 import { filterFetchedItem } from "../../utils/RealtimeFetchUtility";
 import ToolTip from "../info-messages/ToolTip";
 
-//maybe for hosting -> https://vercel.com/solutions/react
 export const FetchCryptoRealTime = () => {
   const API_LIMIT_PER_MINUTE = 4;
 
@@ -27,6 +26,9 @@ export const FetchCryptoRealTime = () => {
     return () => clearInterval(resetErrorMessage);
   });
 
+  /* fetches crypto data, differentiates between a search for a new item and an update of an existing one and 
+  passes the item through a utility function (filterFetchedItem) so that it can be properly displayed on the 
+  table. Finally, it increments the api call count and starts the counter (for least waiting time optimisation) */
   const fetchCryptoData = (current, index) => {
     let crypto;
     typeof index === "undefined"
@@ -81,8 +83,7 @@ export const FetchCryptoRealTime = () => {
         inputMessage={"crypto name or symbol"}
       />
       <div className="limit-reached-message">
-        {limitReached && //maybe add another condition, if returned API message is error
-          "reached update limit, please wait a few seconds"}
+        {limitReached && "reached update limit, please wait a few seconds"}
         <div style={{ display: "flex", justifyContent: "center" }}>
           {errorMessage && "invalid search, please try again"}
         </div>

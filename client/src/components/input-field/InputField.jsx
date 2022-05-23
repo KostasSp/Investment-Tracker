@@ -6,6 +6,7 @@ const InputField = (props) => {
   const [input, setInput] = useState("");
   const [isValid, setIsValid] = useState(false);
 
+  //blocks searching with fewer than the least amount of characters that any stock/crypto would have, or numbers
   useEffect(() => {
     if (typeof input === "undefined") return;
     input.length < 1 || /\d/.test(input) ? setIsValid(false) : setIsValid(true);
