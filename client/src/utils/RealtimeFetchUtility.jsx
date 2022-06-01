@@ -2,8 +2,8 @@
 export const latestValue = (arrayOfObjects) =>
   Object.keys(Object.values(arrayOfObjects).slice(-1)[0])[0];
 
-/* Checks whether fetched crypto is new or already exists on the list (and hence updates it), and
-  passes down fetched data to the list component (through the cryptoData object) */
+/* Checks whether fetched item is new or already exists on the list (and hence updates it), and
+  passes down fetched data to the list component (through the updateState object) */
 export const filterFetchedItem = (
   stockOrCryptoFetched,
   existingItemsArray,

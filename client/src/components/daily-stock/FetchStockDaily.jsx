@@ -15,6 +15,7 @@ const FetchStockDaily = () => {
   const [firstResultsFetched, setFirstResultsFetched] = useState(false);
   const [buttonMessage, setButtonMessage] = useState("get stock prices");
   const [stockData, setStockData] = useState({ data: [] });
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     if (!firstResultsFetched) return;
@@ -29,6 +30,7 @@ const FetchStockDaily = () => {
       resetCounter(setLimitReached, apiCallCount);
       return;
     }
+    setIsPending(true);
     const requests = temp.map((stock) =>
       fetch(
         `https://investment-tracker-finished.herokuapp.com/daily-stock-api/${stock}`
@@ -39,6 +41,7 @@ const FetchStockDaily = () => {
     const promises = responses.map((response) => response.json());
     const data = await Promise.all(promises);
     apiCallCount.current += NUM_OF_STOCKS_FETCHED;
+    setIsPending(false);
     setStockData({ data: [...stockData.data, ...data] });
   };
 
@@ -49,7 +52,7 @@ const FetchStockDaily = () => {
         className="daily-updates-button"
         onClick={() => [fetchDailyStockData(), setFirstResultsFetched(true)]}
       >
-        {buttonMessage}
+        {isPending ? "getting data..." : buttonMessage}
       </button>
       <div className="limit-reached-message" style={{ marginBottom: "65px" }}>
         {limitReached && //maybe add another condition, if returned API message is error

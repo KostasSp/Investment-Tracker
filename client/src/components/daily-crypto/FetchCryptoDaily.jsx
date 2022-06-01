@@ -15,6 +15,7 @@ const FetchCryptoDaily = () => {
   const [cryptoData, setCryptoData] = useState({ data: [] });
   const [dataFetched, setDataFetched] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     if (resultCounter === 0) return;
@@ -30,11 +31,13 @@ const FetchCryptoDaily = () => {
 
   const fetchTopCrypto = async (howManyToFetch) => {
     if (dataFetched) return;
+    setIsPending(true);
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${howManyToFetch}&page=1&sparkline=false&price_change_percentage=24h`
     );
     const jsonData = await response.json();
     apiCallCount.current++;
+    setIsPending(false);
     setCryptoData({ data: jsonData });
   };
 
@@ -56,7 +59,7 @@ const FetchCryptoDaily = () => {
           setResultCounter((counter) => counter + resultsDisplayedPerClick),
         ]}
       >
-        {buttonMessage}
+        {isPending ? "getting data..." : buttonMessage}
       </button>
     </div>
   );
