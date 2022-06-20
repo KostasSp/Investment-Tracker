@@ -10,17 +10,11 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 //from react-icons
-import { FaList, FaRegHeart } from "react-icons/fa";
-import {
-  FiHome,
-  FiLogOut,
-  FiArrowLeftCircle,
-  FiArrowRightCircle,
-} from "react-icons/fi";
+import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import "react-pro-sidebar/dist/css/styles.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const [menuCollapse, setMenuCollapse] = useState(false);

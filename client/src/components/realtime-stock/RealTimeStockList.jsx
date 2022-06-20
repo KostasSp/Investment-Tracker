@@ -24,67 +24,68 @@ export const StockList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(props.stockData.data).length > 0 &&
-            props.stockData.data.map((data, index) => {
-              return (
-                <tr key={index}>
-                  <td>
-                    {" "}
-                    <Tooltip title="Update value">
-                      <UpdateIcon
-                        className="action-icons"
-                        onClick={() => props.update(null, index)}
-                      />
-                    </Tooltip>
-                    <DeleteOutlineIcon
+          {/* I believe this is still working while empty (just before the data comes through), because .data 
+          is initialised as an empty array - although it doesn't break the app, it's not recommended */}
+          {props.stockData.data?.map((data, index) => {
+            return (
+              <tr key={index}>
+                <td>
+                  {" "}
+                  <Tooltip title="Update value">
+                    <UpdateIcon
                       className="action-icons"
-                      style={{ fontSize: "1.4em" }}
-                      onClick={() =>
-                        deleteRow(index, props.stockData, props.setStockData)
-                      }
+                      onClick={() => props.update(null, index)}
                     />
-                    <ArrowDropUpIcon
-                      className="action-icons"
-                      onClick={() =>
-                        changeListOrder(
-                          index,
-                          index - 1,
-                          props.stockData,
-                          props.setStockData
-                        )
-                      }
-                    />
-                    <ArrowDropDownIcon
-                      className="action-icons"
-                      onClick={() =>
-                        changeListOrder(
-                          index,
-                          index + 1,
-                          props.stockData,
-                          props.setStockData
-                        )
-                      }
-                    />
-                  </td>
-                  <td>{data["Meta Data"]["2. Symbol"].toUpperCase()}</td>
-                  <td>{latestValue(data)}</td>
-                  <td>
-                    $
-                    {data["Time Series (5min)"][latestValue(data)][
-                      "4. close"
-                    ].slice(0, -2)}
-                  </td>
-                  <td className="daily-price-change">
-                    {data["Time Series (5min)"][latestValue(data)]["4. close"] >
-                    data["Time Series (5min)"][latestValue(data)]["1. open"] ? (
-                      <TrendingUpIcon className="arrow-up" />
-                    ) : (
-                      <TrendingDownIcon className="arrow-down" />
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+                  </Tooltip>
+                  <DeleteOutlineIcon
+                    className="action-icons"
+                    style={{ fontSize: "1.4em" }}
+                    onClick={() =>
+                      deleteRow(index, props.stockData, props.setStockData)
+                    }
+                  />
+                  <ArrowDropUpIcon
+                    className="action-icons"
+                    onClick={() =>
+                      changeListOrder(
+                        index,
+                        index - 1,
+                        props.stockData,
+                        props.setStockData
+                      )
+                    }
+                  />
+                  <ArrowDropDownIcon
+                    className="action-icons"
+                    onClick={() =>
+                      changeListOrder(
+                        index,
+                        index + 1,
+                        props.stockData,
+                        props.setStockData
+                      )
+                    }
+                  />
+                </td>
+                <td>{data["Meta Data"]["2. Symbol"].toUpperCase()}</td>
+                <td>{latestValue(data)}</td>
+                <td>
+                  $
+                  {data["Time Series (5min)"][latestValue(data)][
+                    "4. close"
+                  ].slice(0, -2)}
+                </td>
+                <td className="daily-price-change">
+                  {data["Time Series (5min)"][latestValue(data)]["4. close"] >
+                  data["Time Series (5min)"][latestValue(data)]["1. open"] ? (
+                    <TrendingUpIcon className="arrow-up" />
+                  ) : (
+                    <TrendingDownIcon className="arrow-down" />
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -74,25 +74,27 @@ export const FetchCryptoRealTime = () => {
   };
 
   return (
-    <div className="main-div">
-      <RealTimeCryptoList
-        cryptoData={cryptoData}
-        setCryptoData={setCryptoData}
-        update={isNewSearchOrUpdate}
-      />{" "}
+    <>
       <ToolTip message="Some suggestions; Bitcoin, Ethereum, Polkadot, ADA, SOL" />
-      <InputField
-        lookUp={lookUpCryptoSymbol}
-        setMappedCrypto={setMappedCrypto}
-        inputMessage={"crypto name or symbol"}
-      />
-      <div className="limit-reached-message">
-        {limitReached && "reached update limit, please wait a few seconds"}
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          {errorMessage && "invalid search, please try again"}
+      <div className="main-div">
+        <RealTimeCryptoList
+          cryptoData={cryptoData}
+          setCryptoData={setCryptoData}
+          update={isNewSearchOrUpdate}
+        />{" "}
+        <InputField
+          lookUp={lookUpCryptoSymbol}
+          setMappedCrypto={setMappedCrypto}
+          inputMessage={"crypto name or symbol"}
+        />
+        <div className="limit-reached-message">
+          {limitReached && "reached update limit, please wait a few seconds"}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {errorMessage && "invalid search, please try again"}
+          </div>
         </div>
+        {isPending && "getting data..."}
       </div>
-      {isPending && "getting data..."}
-    </div>
+    </>
   );
 };
