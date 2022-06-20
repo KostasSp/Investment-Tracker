@@ -19,7 +19,7 @@ tr:nth-child(odd) {
 .styled-table thead tr {
   background-color: #009879;
   color: #ffffff;
-  text-align: left;
+  text-align: center;
 }
 
 .styled-table th,
@@ -53,6 +53,13 @@ tr:nth-child(odd) {
   position: absolute;
   top: 50px;
   right: 220px;
+}
+
+@media (max-width: 980px) {
+  .info-icon {
+    top: 20px;
+    right: 30px;
+  }
 }
 
 @mixin invest-arrow {
