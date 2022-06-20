@@ -1,6 +1,33 @@
+import { CryptoNameToSymbol } from "../assets/CryptoNameToSymbol";
+
 //gets the first item of the returned API object, which consequently is the latest value the API has to offer
 export const latestValue = (arrayOfObjects) =>
   Object.keys(Object.values(arrayOfObjects).slice(-1)[0])[0];
+
+/*gets crypto icon (which is stored in the CryptoNameToSymbol object), so that it can be aggregated with 
+  AlphaVantage's real-time API data*/
+export const lookUpCryptoIcon = (input) => {
+  let temp = "";
+  for (const [key, value] of Object.entries(CryptoNameToSymbol)) {
+    //Unlike stocks, there's a lot of overlap among crypto names, so strict equality is needed
+    if (`${value.name.toLowerCase()}` === input.toLowerCase()) {
+      temp = `${value.image}`;
+      return temp;
+    }
+  }
+};
+
+//AlphaVantage API does not support search using full crypto names, therefore they have to be looked up
+export const lookUpCryptoSymbol = (input, setMappedCrypto) => {
+  for (const [key, value] of Object.entries(CryptoNameToSymbol)) {
+    //Unlike stocks, there's a lot of overlap among crypto names, so strict equality is needed
+    if (`${value.name.toLowerCase()}` === input.toLowerCase()) {
+      setMappedCrypto({ symbol: `${value.symbol}`, icon: `${value.image}` });
+      return;
+    }
+    setMappedCrypto({ symbol: input });
+  }
+};
 
 /* Checks whether fetched item is new or already exists on the list (and hence updates it), and
   passes down fetched data to the list component (through the updateState object) */

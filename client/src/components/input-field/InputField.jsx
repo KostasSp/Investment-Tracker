@@ -23,7 +23,10 @@ const InputField = (props) => {
       <button
         disabled={!isValid}
         className="search-button"
-        onClick={() => [props.lookUp(input), setInput("")]}
+        onClick={() => {
+          props.lookUp(input, props.setMappedCrypto);
+          setInput("");
+        }}
       >
         Search
       </button>
