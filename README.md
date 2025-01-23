@@ -1,3 +1,5 @@
+(2025 Update) Some of the API keys have now expired, so not all options are currently available
+
 This Investment Tracker project is a search engine that allows the user to get up-to-date stock and cryptocurrency values, using AlphaVantage's and CoinGecko's free APIs. The user can request lists of the top stocks and cryptocurrencies and their recent values, as well as real-time values for individual stocks and cryptocurrencies.
 
 Using this app is simple; you are first directed to the real-time cryptocurrency updates page (which has the most information to offer to the user). If you are unsure on what to search for, there are some suggestions on the top right corner, next to the table.
